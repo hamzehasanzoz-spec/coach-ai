@@ -20,7 +20,7 @@ export function ResetPasswordPage() {
     e.preventDefault();
     setError("");
     if (password !== confirm) {
-      setError("Passwords do not match");
+      setError("كلمتا المرور غير متطابقتين");
       return;
     }
     setBusy(true);
@@ -28,7 +28,7 @@ export function ResetPasswordPage() {
       await base44.auth.resetPassword({ resetToken: token, newPassword: password });
       window.location.href = "/login";
     } catch (err) {
-      setError(err.message || "Failed to reset password");
+      setError(err.message || "تعذّر تعيين كلمة المرور");
       setBusy(false);
     }
   }
@@ -37,38 +37,40 @@ export function ResetPasswordPage() {
     return (
       <AuthLayout
         icon={AlertTriangle}
-        title="Invalid reset link"
-        subtitle="This password reset link is missing or invalid"
+        title="رابط غير صالح"
+        subtitle="رابط إعادة التعيين مفقود أو غير صحيح"
         footer={
           <Link to="/forgot-password" className="font-medium text-primary hover:underline">
-            Request a new link
+            اطلب رابطاً جديداً
           </Link>
         }
       >
-        <p className="text-center text-sm text-foreground">The link you used appears to be incomplete. Please request a new password reset email.</p>
+        <p className="text-center text-sm text-foreground">
+          يبدو أن الرابط الذي استخدمته غير مكتمل. اطلب رسالة إعادة تعيين جديدة.
+        </p>
       </AuthLayout>
     );
   }
   return (
-    <AuthLayout icon={Lock} title="New password" subtitle="Enter your new password below">
+    <AuthLayout icon={Lock} title="كلمة مرور جديدة" subtitle="أدخل كلمة المرور الجديدة أدناه">
       <AuthError>{error}</AuthError>
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="reset-password">New password</Label>
+          <Label htmlFor="reset-password">كلمة المرور الجديدة</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="reset-password" type="password" autoComplete="new-password" autoFocus placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pl-10" required />
+            <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="reset-password" type="password" autoComplete="new-password" autoFocus placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pr-10" required />
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="reset-confirm">Confirm password</Label>
+          <Label htmlFor="reset-confirm">تأكيد كلمة المرور</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="reset-confirm" type="password" autoComplete="new-password" placeholder="••••••••" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-12 pl-10" required />
+            <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="reset-confirm" type="password" autoComplete="new-password" placeholder="••••••••" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-12 pr-10" required />
           </div>
         </div>
-        <SubmitButton busy={busy} busyLabel="Resetting...">
-          Reset password
+        <SubmitButton busy={busy} busyLabel="جاري الحفظ...">
+          تعيين كلمة المرور
         </SubmitButton>
       </form>
     </AuthLayout>

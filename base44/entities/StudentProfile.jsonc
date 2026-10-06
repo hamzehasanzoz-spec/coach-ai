@@ -1,0 +1,13 @@
+{
+  "name": "StudentProfile",
+  "type": "object",
+  "properties": {
+    "university": {
+      "type": "string"
+    },
+    "target_exam_date": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

@@ -34,8 +34,8 @@ export function SubmitButton({ busy, busyLabel, children, ...props }) {
 export function GoogleButton({ returnTo }) {
   return (
     <Button type="button" variant="outline" className="mb-6 h-12 w-full text-sm font-medium" onClick={() => base44.auth.loginWithProvider("google", returnTo)}>
-      <GoogleIcon className="mr-2 h-5 w-5" />
-      Continue with Google
+      <GoogleIcon className="ml-2 h-5 w-5" />
+      المتابعة عبر Google
     </Button>
   );
 }
@@ -47,7 +47,7 @@ export function OrDivider() {
         <div className="w-full border-t border-border" />
       </div>
       <div className="relative flex justify-center text-xs uppercase">
-        <span className="bg-card px-3 text-muted-foreground">or</span>
+        <span className="bg-card px-3 text-muted-foreground">أو</span>
       </div>
     </div>
   );

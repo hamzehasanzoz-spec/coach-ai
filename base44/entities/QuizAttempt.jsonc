@@ -1,0 +1,28 @@
+{
+  "name": "QuizAttempt",
+  "type": "object",
+  "properties": {
+    "topic": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "correct": {
+      "type": "boolean",
+      "default": false
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "bank",
+        "ai"
+      ],
+      "default": "bank"
+    }
+  },
+  "required": [
+    "topic",
+    "correct"
+  ]
+}

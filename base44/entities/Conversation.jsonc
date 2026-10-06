@@ -1,0 +1,21 @@
+{
+  "name": "Conversation",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "explain",
+        "quiz",
+        "notes"
+      ],
+      "default": "explain"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

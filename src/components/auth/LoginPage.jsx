@@ -25,44 +25,44 @@ export function LoginPage() {
       // A hard redirect: the app re-initializes with the new session.
       window.location.href = returnTo;
     } catch (err) {
-      setError(err.message || "Invalid email or password");
+      setError(err.message || "البريد الإلكتروني أو كلمة المرور غير صحيحة");
       setBusy(false);
     }
   }
 
   return (
-    <AuthLayout icon={LogIn} title="Welcome back" subtitle="Log in to your account">
+    <AuthLayout icon={LogIn} title="مرحباً بعودتك" subtitle="سجّل الدخول إلى حسابك">
       <GoogleButton returnTo={returnTo} />
       <OrDivider />
       <AuthError>{error}</AuthError>
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="login-email">Email</Label>
+          <Label htmlFor="login-email">البريد الإلكتروني</Label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="login-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pl-10" required />
+            <Mail className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="login-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pr-10" required />
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="login-password">Password</Label>
+            <Label htmlFor="login-password">كلمة المرور</Label>
             <AuthLink to="/forgot-password" returnTo={returnTo} className="text-xs text-primary hover:underline">
-              Forgot password?
+              هل نسيت كلمة المرور؟
             </AuthLink>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="login-password" type="password" autoComplete="current-password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pl-10" required />
+            <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="login-password" type="password" autoComplete="current-password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pr-10" required />
           </div>
         </div>
-        <SubmitButton busy={busy} busyLabel="Logging in...">
-          Log in
+        <SubmitButton busy={busy} busyLabel="جاري تسجيل الدخول...">
+          تسجيل الدخول
         </SubmitButton>
       </form>
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Don't have an account?{" "}
+        ليس لديك حساب؟{" "}
         <AuthLink to="/register" returnTo={returnTo}>
-          Create one
+          أنشئ حساباً
         </AuthLink>
       </p>
     </AuthLayout>

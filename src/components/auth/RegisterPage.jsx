@@ -30,7 +30,7 @@ export function RegisterPage() {
     e.preventDefault();
     setError("");
     if (password !== confirm) {
-      setError("Passwords do not match");
+      setError("كلمتا المرور غير متطابقتين");
       return;
     }
     setBusy(true);
@@ -38,7 +38,7 @@ export function RegisterPage() {
       await base44.auth.register({ email, password });
       setStep("otp");
     } catch (err) {
-      setError(err.message || "Registration failed");
+      setError(err.message || "تعذّر إنشاء الحساب");
     } finally {
       setBusy(false);
     }
@@ -56,7 +56,7 @@ export function RegisterPage() {
       // Verified server-side but the answer never arrived: the code is spent and
       // there is no token, so the only way forward is a normal sign-in.
       if (isAlreadyVerified(err)) setStep("already_verified");
-      else setError(err.message || "Invalid verification code");
+      else setError(err.message || "رمز التحقق غير صحيح");
       setBusy(false);
     }
   }
@@ -65,21 +65,21 @@ export function RegisterPage() {
     setError("");
     try {
       await base44.auth.resendOtp(email);
-      toast("Code sent", { description: "Check your email for the new code." });
+      toast("تم إرسال رمز جديد", { description: "تحقّق من بريدك الإلكتروني للحصول على الرمز." });
     } catch (err) {
       if (isAlreadyVerified(err)) setStep("already_verified");
-      else setError(err.message || "Failed to resend code");
+      else setError(err.message || "تعذّر إعادة إرسال الرمز");
     }
   }
 
   if (step === "already_verified") {
     return (
-      <AuthLayout icon={UserPlus} title="Create your account" subtitle="Sign up to get started">
+      <AuthLayout icon={UserPlus} title="أنشئ حسابك" subtitle="انضم إلى كوتش AI وابدأ مراجعتك">
         <p className="mb-4 text-sm text-muted-foreground">
-          <span className="font-medium text-foreground">{email}</span> is already verified. Sign in to continue.
+          <span className="font-medium text-foreground">{email}</span> مُوثَّق بالفعل. سجّل الدخول للمتابعة.
         </p>
         <AuthLink to="/login" returnTo={returnTo} className="inline-flex h-12 w-full items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90">
-          Sign in
+          تسجيل الدخول
         </AuthLink>
       </AuthLayout>
     );
@@ -87,13 +87,13 @@ export function RegisterPage() {
 
   if (step === "otp") {
     return (
-      <AuthLayout icon={UserPlus} title="Create your account" subtitle="Sign up to get started">
+      <AuthLayout icon={UserPlus} title="أنشئ حسابك" subtitle="انضم إلى كوتش AI وابدأ مراجعتك">
         <form onSubmit={verify}>
           <p className="mb-4 text-sm text-muted-foreground">
-            We sent a 6-digit code to <span className="font-medium text-foreground">{email}</span>.
+            أرسلنا رمزاً من ٦ أرقام إلى <span className="font-medium text-foreground" dir="ltr">{email}</span>.
           </p>
           <AuthError>{error}</AuthError>
-          <div className="mb-6 flex justify-center">
+          <div className="mb-6 flex justify-center" dir="ltr">
             <InputOTP maxLength={6} value={otpCode} onChange={setOtpCode} autoFocus autoComplete="one-time-code">
               <InputOTPGroup>
                 {[0, 1, 2, 3, 4, 5].map((i) => (
@@ -102,13 +102,13 @@ export function RegisterPage() {
               </InputOTPGroup>
             </InputOTP>
           </div>
-          <SubmitButton busy={busy} busyLabel="Verifying..." disabled={busy || otpCode.length < 6}>
-            Verify
+          <SubmitButton busy={busy} busyLabel="جاري التحقق..." disabled={busy || otpCode.length < 6}>
+            تأكيد الرمز
           </SubmitButton>
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            Didn't receive the code?{" "}
+            لم يصلك الرمز؟{" "}
             <button type="button" onClick={resend} className="font-medium text-primary hover:underline">
-              Resend
+              إعادة الإرسال
             </button>
           </p>
         </form>
@@ -117,40 +117,40 @@ export function RegisterPage() {
   }
 
   return (
-    <AuthLayout icon={UserPlus} title="Create your account" subtitle="Sign up to get started">
+    <AuthLayout icon={UserPlus} title="أنشئ حسابك" subtitle="انضم إلى كوتش AI وابدأ مراجعتك">
       <GoogleButton returnTo={returnTo} />
       <OrDivider />
       <AuthError>{error}</AuthError>
       <form onSubmit={register} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="register-email">Email</Label>
+          <Label htmlFor="register-email">البريد الإلكتروني</Label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="register-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pl-10" disabled={busy} required />
+            <Mail className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="register-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pr-10" disabled={busy} required />
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="register-password">Password</Label>
+          <Label htmlFor="register-password">كلمة المرور</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="register-password" type="password" autoComplete="new-password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pl-10" disabled={busy} required />
+            <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="register-password" type="password" autoComplete="new-password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 pr-10" disabled={busy} required />
           </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor="register-confirm">Confirm password</Label>
+          <Label htmlFor="register-confirm">تأكيد كلمة المرور</Label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-            <Input id="register-confirm" type="password" autoComplete="new-password" placeholder="••••••••" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-12 pl-10" disabled={busy} required />
+            <Lock className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <Input id="register-confirm" type="password" autoComplete="new-password" placeholder="••••••••" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-12 pr-10" disabled={busy} required />
           </div>
         </div>
-        <SubmitButton busy={busy} busyLabel="Creating account...">
-          Create account
+        <SubmitButton busy={busy} busyLabel="جاري إنشاء الحساب...">
+          إنشاء الحساب
         </SubmitButton>
       </form>
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Already have an account?{" "}
+        لديك حساب بالفعل؟{" "}
         <AuthLink to="/login" returnTo={returnTo}>
-          Log in
+          تسجيل الدخول
         </AuthLink>
       </p>
     </AuthLayout>

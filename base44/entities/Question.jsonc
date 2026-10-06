@@ -1,0 +1,39 @@
+{
+  "name": "Question",
+  "type": "object",
+  "properties": {
+    "topic_name": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "correct_index": {
+      "type": "number",
+      "default": 0
+    },
+    "explanation": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "bank",
+        "ai"
+      ],
+      "default": "bank"
+    }
+  },
+  "required": [
+    "topic_name",
+    "text",
+    "options",
+    "correct_index"
+  ]
+}

@@ -29,27 +29,29 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <AuthLayout icon={Mail} title="Reset password" subtitle="We'll send you a link to reset it">
+    <AuthLayout icon={Mail} title="استعادة كلمة المرور" subtitle="سنرسل لك رابطاً لإعادة تعيينها">
       {sent ? (
-        <p className="text-center text-sm text-foreground">If an account exists with that email, you'll receive a password reset link shortly.</p>
+        <p className="text-center text-sm text-foreground">
+          إذا كان هناك حساب بهذا البريد الإلكتروني فسيصلك رابط إعادة التعيين خلال دقائق.
+        </p>
       ) : (
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="forgot-email">Email address</Label>
+            <Label htmlFor="forgot-email">البريد الإلكتروني</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-              <Input id="forgot-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pl-10" required />
+              <Mail className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input id="forgot-email" type="email" autoComplete="email" autoFocus placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="h-12 pr-10" required />
             </div>
           </div>
-          <SubmitButton busy={busy} busyLabel="Sending...">
-            Send reset link
+          <SubmitButton busy={busy} busyLabel="جاري الإرسال...">
+            إرسال الرابط
           </SubmitButton>
         </form>
       )}
       <p className="mt-6 text-center text-sm text-muted-foreground">
         <AuthLink to="/login" returnTo={returnTo}>
-          <ArrowLeft className="mr-1 inline h-3 w-3" aria-hidden="true" />
-          Back to log in
+          <ArrowLeft className="ml-1 inline h-3 w-3" aria-hidden="true" />
+          العودة لتسجيل الدخول
         </AuthLink>
       </p>
     </AuthLayout>

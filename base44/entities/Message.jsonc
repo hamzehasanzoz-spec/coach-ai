@@ -1,0 +1,34 @@
+{
+  "name": "Message",
+  "type": "object",
+  "properties": {
+    "conversation_id": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "user",
+        "assistant"
+      ],
+      "default": "user"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "chat",
+        "quiz",
+        "note"
+      ],
+      "default": "chat"
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "conversation_id",
+    "role",
+    "content"
+  ]
+}
