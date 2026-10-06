@@ -8,6 +8,35 @@
     "target_exam_date": {
       "type": "string",
       "format": "date"
+    },
+    "study_style": {
+      "type": "string",
+      "enum": [
+        "visual",
+        "auditory",
+        "reading",
+        "kinesthetic"
+      ]
+    },
+    "study_times": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "weak_subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "medical_background": {
+      "type": "string"
+    },
+    "questionnaire_completed": {
+      "type": "boolean",
+      "default": false
     }
-  }
+  },
+  "required": []
 }

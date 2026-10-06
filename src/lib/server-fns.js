@@ -433,16 +433,75 @@ export const saveMyProfile = createServerFn({ method: "POST" })
     z.object({
       university: z.string().max(160).optional(),
       target_exam_date: z.string().max(20).optional(),
+      study_style: z.enum(["visual", "auditory", "reading", "kinesthetic"]).optional(),
+      study_times: z.array(z.string().max(40)).max(10).optional(),
+      weak_subjects: z.array(z.string().max(80)).max(30).optional(),
+      medical_background: z.string().max(1200).optional(),
+      questionnaire_completed: z.boolean().optional(),
     }),
   )
   .handler(async ({ data, context }) => {
     const base44 = context.getBase44();
     const page = await base44.entities.StudentProfile.filter({ created_by_id: context.user.id }, { limit: 1 });
     const existing = asList(page)[0];
-    const payload = { university: data.university ?? "", target_exam_date: data.target_exam_date ?? "" };
-    return existing
-      ? base44.entities.StudentProfile.update(existing.id, payload)
-      : base44.entities.StudentProfile.create(payload);
+    // Only the fields the caller sent are written, so the preferences form and the
+    // questionnaire can each save their own part of the profile.
+    const patch = Object.fromEntries(Object.entries(data).filter(([, value]) => value !== undefined));
+
+    if (existing) {
+      if (Object.keys(patch).length === 0) return existing;
+      return base44.entities.StudentProfile.update(existing.id, patch);
+    }
+
+    return base44.entities.StudentProfile.create({
+      university: "",
+      target_exam_date: "",
+      study_times: [],
+      weak_subjects: [],
+      medical_background: "",
+      questionnaire_completed: false,
+      ...patch,
+    });
+  });
+
+// ------------------------------------------------------------------ study materials
+
+export const listStudyMaterials = createServerFn({ method: "GET" })
+  .middleware([requireUser])
+  .handler(async ({ context }) => {
+    const page = await context
+      .getBase44()
+      .entities.StudyMaterial.filter({ created_by_id: context.user.id }, { sort: "-created_date", limit: 100 });
+    return asList(page);
+  });
+
+export const addStudyMaterial = createServerFn({ method: "POST" })
+  .middleware([requireUser])
+  .validator(
+    z.object({
+      name: z.string().min(1).max(200),
+      file_uri: z.string().min(1).max(1000),
+      file_type: z.string().max(20).optional(),
+      size: z.number().nonnegative().max(100000000).optional(),
+    }),
+  )
+  .handler(({ data, context }) =>
+    context.getBase44().entities.StudyMaterial.create({
+      name: data.name,
+      file_uri: data.file_uri,
+      file_type: data.file_type ?? "",
+      size: data.size ?? 0,
+    }),
+  );
+
+export const deleteStudyMaterial = createServerFn({ method: "POST" })
+  .middleware([requireUser])
+  .validator(z.object({ id: z.string().min(1) }))
+  .handler(async ({ data, context }) => {
+    const base44 = context.getBase44();
+    await ownedRecord(base44, "StudyMaterial", data.id, context.user);
+    await base44.entities.StudyMaterial.delete(data.id);
+    return { ok: true };
   });
 
 // ------------------------------------------------------------------ study content

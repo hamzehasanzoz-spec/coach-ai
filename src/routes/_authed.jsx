@@ -1,10 +1,21 @@
-import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { AuthGateError, requireSignedIn } from "@/components/auth/AuthGate";
 import AppNav from "@/components/layout/AppNav";
+import { getMyProfile } from "@/lib/server-fns";
 
 export const Route = createFileRoute("/_authed")({
   ssr: false,
-  beforeLoad: requireSignedIn,
+  beforeLoad: async ({ context, location }) => {
+    const session = await requireSignedIn({ context, location });
+
+    // A student's first entry into the app opens the study questionnaire once.
+    if (session.user.role !== "admin" && location.pathname !== "/questionnaire") {
+      const { profile } = await getMyProfile();
+      if (profile?.questionnaire_completed !== true) throw redirect({ to: "/questionnaire" });
+    }
+
+    return session;
+  },
   errorComponent: AuthGateError,
   component: AuthedLayout,
 });

@@ -1,0 +1,23 @@
+{
+  "name": "StudyMaterial",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "file_uri": {
+      "type": "string"
+    },
+    "file_type": {
+      "type": "string"
+    },
+    "size": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "name",
+    "file_uri"
+  ]
+}
