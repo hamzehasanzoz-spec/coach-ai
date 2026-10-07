@@ -1,5 +1,5 @@
 {
-  "name": "base44-app",
+  "name": "كوتش AI",
   "site": {
     "installCommand": "npm install",
     "buildCommand": "npm run build",
