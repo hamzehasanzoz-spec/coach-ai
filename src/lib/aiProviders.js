@@ -112,7 +112,7 @@ export async function askAI(prompt, systemPrompt) {
 
 ```javascript
 // src/lib/rag.js
-import { supabase } from './supabase';
+import { supabase } from './supabase.js';
 import { askAI } from './aiProviders';
 
 const SYSTEM_PROMPT = `أنت "كوتش AI" - المساعد الطبي المخصص لطلاب الطب البشري المتقدمين للامتحان الوطني الموحد في سوريا.
