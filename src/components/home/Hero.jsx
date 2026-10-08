@@ -10,10 +10,10 @@ const POINTS = ["بالعربية بالكامل", "أسئلة بنمط الام
 
 export default function Hero() {
   return (
-    <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:py-24">
+    <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:py-24" dir="rtl">
       <div className="animate-fade-up">
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium text-primary">
-          منصة عربية لطلاب الطب
+          منصة عربية لطلاب الطب البشري في سوريا
         </span>
         <h1 className="mt-6 text-4xl font-extrabold leading-[1.2] tracking-tight sm:text-5xl lg:text-[3.4rem]">
           استعد للامتحان الوطني
@@ -21,8 +21,7 @@ export default function Hero() {
           مع مدرّب <span className="text-primary">يفهمك</span>
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-9 text-muted-foreground">
-          كوتش AI يشرح لك المفاهيم الطبية خطوة بخطوة، يختبرك بأسئلة على نمط الامتحان الوطني، ويلخّص ملاحظاتك — مع خطة
-          دراسية ومتابعة دقيقة لتقدّمك.
+          كوتش AI يشرح لك المفاهيم الطبية خطوة بخطوة، يختبرك بأسئلة على نمط الامتحان الوطني، ويلخّص محاضراتك — مع خطة دراسية ومتابعة دقيقة لتقدّمك.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -49,9 +48,8 @@ export default function Hero() {
 
       <div className="panel animate-fade-in relative overflow-hidden p-3 [animation-delay:120ms]">
         <div className="h-64 w-full overflow-hidden rounded-2xl bg-secondary sm:h-80 lg:h-[26rem]">
-          {/* Sized to the browser, so it renders client-side only. */}
           <ClientOnly fallback={<div className="h-full w-full bg-secondary" />}>
-            <Image src={HERO_IMAGE} alt="طالب طب يدرس بمساعدة كوتش AI" className="h-full w-full" />
+            <Image src={HERO_IMAGE} alt="طالب طب يدرس بمساعدة كوتش AI" className="h-full w-full object-cover" />
           </ClientOnly>
         </div>
       </div>

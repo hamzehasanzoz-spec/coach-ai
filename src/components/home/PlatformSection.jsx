@@ -9,7 +9,7 @@ const ITEMS = [
   {
     Icon: CalendarCheck,
     title: "خطة دراسية واضحة",
-    body: "وزّع المواد على أيامك، وحدّد ما أنجزته، وشاهد العدّ التنازلي حتى موعد الامتحان.",
+    body: "وزّع المواد الطبيّة على أيامك، وحدّد ما أنجزته، وشاهد العدّ التنازلي حتى موعد الامتحان.",
   },
   {
     Icon: History,
@@ -20,7 +20,7 @@ const ITEMS = [
 
 export default function PlatformSection() {
   return (
-    <section id="platform" className="border-y border-border/70 bg-card/50 py-16 lg:py-20">
+    <section id="platform" className="border-y border-border/70 bg-card/50 py-16 lg:py-20" dir="rtl">
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2">
         <div>
           <span className="text-sm font-semibold text-primary">لوحة التحكم</span>

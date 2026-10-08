@@ -26,7 +26,7 @@ export const Route = createFileRoute("/_authed/chat")({
     const messages = activeId ? await listMessages({ data: { conversation_id: activeId } }) : [];
     return { conversations, topics, activeId, messages };
   },
-  head: () => ({ meta: [{ title: "الدردشة — كوتش AI" }] }),
+  head: () => ({ meta: [{ title: "الدردشة الطبية — كوتش AI" }] }),
   component: ChatPage,
 });
 
@@ -59,6 +59,7 @@ function ChatPage() {
   }
 
   async function handleSend(text) {
+    if (!text.trim() || busy) return;
     setBusy(true);
     try {
       const id = await ensureConversation();
@@ -68,7 +69,7 @@ function ChatPage() {
       await router.invalidate();
     } catch {
       setExtra([]);
-      toast.error("تعذّر إرسال الرسالة. حاول مرة أخرى.");
+      toast.error("تعذّر إرسال الرسالة. يرجى المحاولة مرة أخرى.");
     } finally {
       setBusy(false);
     }
@@ -89,7 +90,7 @@ function ChatPage() {
   }
 
   async function handleAnswer(index) {
-    if (!quiz || quiz.selected !== null) return;
+    if (!quiz || quiz.selected !== null || busy) return;
     setBusy(true);
     try {
       const result = await answerQuestion({
@@ -98,7 +99,7 @@ function ChatPage() {
       setQuiz((current) => (current ? { ...current, selected: index, result } : current));
       await router.invalidate();
     } catch {
-      toast.error("تعذّر تسجيل الإجابة. حاول مرة أخرى.");
+      toast.error("تعذّر تسجيل الإجابة.");
     } finally {
       setBusy(false);
     }
@@ -112,9 +113,9 @@ function ChatPage() {
       const { signed_url } = await base44.integrations.Core.CreateFileSignedUrl({ file_uri });
       await summarizeNote({ data: { conversation_id: id, file_uri, signed_url, title } });
       await router.invalidate();
-      toast.success("تم تلخيص الملاحظات وحفظها في بياناتك.");
+      toast.success("تم تحليل المحاضرة واستخراج النقاط المهمة.");
     } catch {
-      toast.error("تعذّر تحليل الملف. تأكد من نوعه وحاول مرة أخرى.");
+      toast.error("تعذّر تحليل الملف. تأكد من الصيغة والحجم.");
     } finally {
       setBusy(false);
     }
@@ -138,7 +139,7 @@ function ChatPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6 lg:h-[calc(100vh-4rem)] lg:flex-row lg:py-8">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6 lg:h-[calc(100vh-4rem)] lg:flex-row lg:py-8" dir="rtl">
       <ConversationList
         conversations={conversations}
         activeId={activeId}

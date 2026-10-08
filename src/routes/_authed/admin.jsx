@@ -2,9 +2,9 @@ import { Link, Outlet, createFileRoute, redirect } from "@tanstack/react-router"
 import { BarChart3, BookOpen, Users } from "lucide-react";
 
 const TABS = [
-  { to: "/admin/users", label: "الطلاب", Icon: Users },
-  { to: "/admin/content", label: "المحتوى الدراسي", Icon: BookOpen },
-  { to: "/admin/usage", label: "الإحصاءات", Icon: BarChart3 },
+  { to: "/admin/users", label: "الطلاب والمستخدمون", Icon: Users },
+  { to: "/admin/content", label: "المحتوى وبنك الأسئلة", Icon: BookOpen },
+  { to: "/admin/usage", label: "الإحصاءات والنشاط", Icon: BarChart3 },
 ];
 
 export const Route = createFileRoute("/_authed/admin")({
@@ -16,10 +16,10 @@ export const Route = createFileRoute("/_authed/admin")({
 
 function AdminLayout() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12" dir="rtl">
       <header className="mb-6">
-        <p className="text-sm font-medium text-primary">لوحة الإدارة</p>
-        <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">إدارة كوتش AI</h1>
+        <p className="text-sm font-medium text-primary">لوحة المشرفين</p>
+        <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">إدارة منصة كوتش AI</h1>
       </header>
 
       <nav className="no-scrollbar mb-8 flex gap-2 overflow-x-auto rounded-2xl border border-border bg-card p-1.5">

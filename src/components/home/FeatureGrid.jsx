@@ -4,23 +4,23 @@ const FEATURES = [
   {
     Icon: MessageSquareText,
     title: "اشرح لي",
-    body: "اسأل عن أي موضوع طبي واحصل على شرح مرتب بالعربية: عناوين قصيرة، أمثلة سريرية، وأخطاء شائعة يجب تجنّبها.",
+    body: "اسأل عن أي موضوع طبي واحصل على شرح مرتب بالعربية: عناوين قصيرة، أمثلة سريرية، وأخطاء شائعة يجب تجنّبها في الوطني.",
   },
   {
     Icon: ListChecks,
     title: "اختبرني",
-    body: "أسئلة اختيار من متعدد على نمط الامتحان الوطني من بنك الأسئلة، مع تصحيح فوري وشرح لسبب الإجابة.",
+    body: "أسئلة اختيار من متعدد (MCQ) على نمط الامتحان الوطني من بنك الأسئلة، مع تصحيح فوري وشرح لسبب صحة الإجابة.",
   },
   {
     Icon: FileText,
     title: "راجع ملاحظاتي",
-    body: "ارفع ملف المحاضرة أو ملاحظاتك، ودع الكوتش يلخّصها إلى نقاط مركزة وأسئلة محتملة قبل المراجعة.",
+    body: "ارفع ملف المحاضرة أو ملخصاتك الطبية، ودع الكوتش يلخّصها إلى نقاط مركزة وأسئلة محتملة قبل المراجعة.",
   },
 ];
 
 export default function FeatureGrid() {
   return (
-    <section id="features" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
+    <section id="features" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20" dir="rtl">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">ثلاث طرق للدراسة، مدرّب واحد</h2>
         <p className="mt-4 text-lg leading-8 text-muted-foreground">

@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_authed/dashboard")({
 function DashboardPage() {
   const { stats, plan, conversations } = Route.useLoaderData();
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-12" dir="rtl">
       <header className="mb-8">
         <p className="text-sm font-medium text-primary">لوحة التحكم</p>
         <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">تقدّمك حتى الامتحان الوطني</h1>
