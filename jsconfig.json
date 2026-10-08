@@ -9,3 +9,12 @@
   },
   "exclude": ["node_modules", "dist", ".wrangler", ".tanstack"]
 }
+{
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
